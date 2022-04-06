@@ -322,34 +322,3 @@ output "server_id" {
     value = aws_instance.EC2-LINUX.id  
 }
 
-
-
-
-
-
-
-resource "aws_security_group" "SECG-LOADBALANCER" {
-    name = "Allow_Traffic_LB"
-    description = "Allow_Traffic_LB"
-    vpc_id = aws_vpc.PROYECTO-VPC.id
-
-    ingress {
-        description = "HTTP"
-        from_port = 80
-        to_port = 80
-        cidr_blocks = ["0.0.0.0/0"]
-        protocol = "tcp"
-    }
-
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    tags = {
-      "Name" = "SECG-LOADBALANCER"
-    }
-}
-
