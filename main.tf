@@ -7,7 +7,6 @@ resource "aws_vpc" "PROYECTO-VPC" {
 }
 
 
-
 resource "aws_internet_gateway" "INTERNET-GW-PROYECTO" {
     vpc_id = aws_vpc.proyecto-vpc.id  
 }
@@ -24,7 +23,6 @@ resource "aws_subnet" "SUBNET-PUBLIC-14" {
       "Name" = "SUBNET-PUBLIC-14"
     }  
 }
-
 
 
 
@@ -49,7 +47,7 @@ resource "aws_subnet" "SUBNET-PRIVATE-15" {
     }  
 }
 
-    
+   
     
 }
 
@@ -319,4 +317,4 @@ output "MY-SERVER-PRIVATE-IP" {
 
 output "server_id" {
     value = aws_instance.EC2-LINUX.id  
-}
+} 
