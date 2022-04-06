@@ -14,18 +14,6 @@ resource "aws_internet_gateway" "INTERNET-GW-PROYECTO" {
 
 
 
-resource "aws_subnet" "SUBNET-PUBLICA" {
-
-    vpc_id = aws_vpc.PROYECTO-VPC.id
-    cidr_block = "192.168.0.0/24"
-    availability_zone = "us-east-1a"
-
-    tags = {
-      "Name" = "SUBNET-PUBLICA"
-    }  
-}
-
-
 resource "aws_subnet" "SUBNET-PUBLIC-14" {
 
     vpc_id = aws_vpc.PROYECTO-VPC.id
@@ -49,6 +37,20 @@ resource "aws_subnet" "SUBNET-PRIVATE-15" {
       "Name" = "SUBNET-PRIVATE-15"
     }
   
+    
+    resource "aws_subnet" "SUBNET-PUBLICA" {
+
+    vpc_id = aws_vpc.PROYECTO-VPC.id
+    cidr_block = "192.168.0.0/24"
+    availability_zone = "us-east-1a"
+
+    tags = {
+      "Name" = "SUBNET-PUBLICA"
+    }  
+}
+
+    
+    
 }
 
 resource "aws_subnet" "SUBNET-PRIVATE-16" {
@@ -62,21 +64,6 @@ resource "aws_subnet" "SUBNET-PRIVATE-16" {
   
 }
 
-
-
-resource "aws_route_table" "R-PUBLIC" {
-    vpc_id = aws_vpc.PROYECTO-VPC.id
-
-    route {
-        cidr_block = "0.0.0.0/0"
-        gateway_id = aws_internet_gateway.INTERNET-GW-PROYECTO.id
-    }
-
-    tags = {
-      "Name" = "R-PUBLIC"
-    }
-  
-}
 
 resource "aws_route_table_association" "ROUTES-SUBNETS-ASSOCIATION" {
     subnet_id = aws_subnet.SUBNET-PUBLICA.id
@@ -103,7 +90,19 @@ resource "aws_route_table_association" "ROUTES-SUBNETS-ASSOCIATION-8" {
     route_table_id = aws_route_table.ROUTES-PUBLIC-8.id  
 }
 
+resource "aws_route_table" "R-PUBLIC" {
+    vpc_id = aws_vpc.PROYECTO-VPC.id
 
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_internet_gateway.INTERNET-GW-PROYECTO.id
+    }
+
+    tags = {
+      "Name" = "R-PUBLIC"
+    }
+  
+}
 
 
 
