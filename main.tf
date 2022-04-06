@@ -7,9 +7,11 @@ resource "aws_vpc" "PROYECTO-VPC" {
 }
 
 
+
 resource "aws_internet_gateway" "INTERNET-GW-PROYECTO" {
     vpc_id = aws_vpc.proyecto-vpc.id  
 }
+
 
 
 
@@ -36,6 +38,7 @@ resource "aws_subnet" "SUBNET-PRIVATE-15" {
     }
   
     
+    
     resource "aws_subnet" "SUBNET-PUBLICA" {
 
     vpc_id = aws_vpc.PROYECTO-VPC.id
@@ -46,7 +49,6 @@ resource "aws_subnet" "SUBNET-PRIVATE-15" {
       "Name" = "SUBNET-PUBLICA"
     }  
 }
-
    
     
 }
@@ -275,7 +277,7 @@ resource "aws_instance" "EC2-LINUX-PRIVATE-7" {
     }
 
      user_data = <<-EOF
-            #!/bin/bash            
+            #!/bin/bash           
             sudo systemctl enable httpd
             sudo systemctl start httpd
             EOF
